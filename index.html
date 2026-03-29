@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooper Alan | REALTOR® | Northeast Ohio | HomeSmart</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --red: #C8102E;
+      --red-dark: #A00D24;
+      --black: #111111;
+      --dark: #1A1A1A;
+      --gray: #6B7280;
+      --light: #F8F7F5;
+    }
+
+    * { box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; margin: 0; background: #fff; color: #1A1A1A; overflow-x: hidden; }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+    /* ── Shadows ── */
+    .shadow-red  { box-shadow: 0 1px 2px rgba(200,16,46,0.04), 0 4px 12px rgba(200,16,46,0.1), 0 16px 40px rgba(0,0,0,0.14); }
+    .shadow-card { box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 16px rgba(0,0,0,0.07), 0 24px 48px rgba(0,0,0,0.09); }
+
+    /* ── Divider / Label ── */
+    .divider-red  { width: 48px; height: 2px; background: #C8102E; flex-shrink: 0; }
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      background: #C8102E; color: white; padding: 15px 34px;
+      font-weight: 600; font-size: 13px; letter-spacing: 0.06em;
+      text-transform: uppercase; border: none; cursor: pointer;
+      text-decoration: none; display: inline-block; border-radius: 2px;
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(200,16,46,0.32);
+    }
+    .btn-primary:hover { background: #A00D24; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,16,46,0.42); }
+
+    /* ── Nav ── */
+    .nav-link {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+      color: #555; text-decoration: none; transition: color 0.2s;
+    }
+    .nav-link:hover { color: var(--red); }
+
+    /* ── Service / Testimonial cards ── */
+    .service-card { transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease; }
+    .service-card:hover { transform: translateY(-6px); box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 12px 28px rgba(0,0,0,0.1), 0 36px 64px rgba(0,0,0,0.12); }
+    .testimonial-quote { font-family: 'Playfair Display', serif; font-style: italic; }
+
+    /* ════════════════════════════════════════════
+       HERO section
+    ════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      width: 100%;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* ── Hero content ── */
+    #hero-content {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px 80px;
+    }
+
+    /* ── Letter animation ── */
+    .letter-span {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(60px);
+      transition-property: opacity, transform;
+      transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+      background: linear-gradient(135deg, #171717 0%, rgba(64,64,64,0.8) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .letter-span.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .word-span { display: inline-block; margin-right: 0.25em; }
+    .word-span:last-child { margin-right: 0; }
+
+    /* ── "Start Your Journey" button (shadcn ghost + glassmorphism wrapper) ── */
+    .journey-wrapper {
+      display: inline-block;
+      position: relative;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(255,255,255,0.1));
+      padding: 1px;
+      border-radius: 1.25rem;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      transition: box-shadow 0.3s ease;
+    }
+    .journey-wrapper:hover { box-shadow: 0 16px 40px rgba(0,0,0,0.18); }
+
+    .journey-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 22px 38px;
+      border-radius: 1.15rem;
+      background: rgba(255,255,255,0.95);
+      border: 1px solid rgba(0,0,0,0.1);
+      font-size: 18px;
+      font-weight: 600;
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: background 0.3s ease, transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      font-family: 'Inter', sans-serif;
+      letter-spacing: 0.01em;
+    }
+    .journey-btn:hover {
+      background: rgba(255,255,255,1);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .journey-btn .arrow {
+      opacity: 0.6;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .journey-btn:hover .arrow { transform: translateX(5px); opacity: 1; }
+
+    /* ── Marketing cards hover ── */
+    .mkt-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .mkt-card:hover { transform: translateY(-4px) rotate(-0.5deg); box-shadow: 0 16px 40px rgba(0,0,0,0.22); }
+
+    /* ── Community card hover ── */
+    .community-card img { transition: transform 0.4s ease; }
+    .community-card:hover img { transform: scale(1.06); }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       STICKY NAV (white — sits over white hero)
+  ═══════════════════════════════════════════ -->
+  <nav style="position:fixed; top:0; left:0; right:0; z-index:50; background:rgba(255,255,255,0.85); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); border-bottom:1px solid rgba(0,0,0,0.06);">
+    <div style="max-width:1280px; margin:0 auto; padding:0 32px; height:64px; display:flex; align-items:center; justify-content:space-between;">
+      <!-- HomeSmart Momentum (dark version) -->
+      <a href="#" style="display:flex; align-items:center; text-decoration:none;">
+        <img src="brand_assets/Screenshot 2025-10-22 135746.png" alt="HomeSmart Real Estate Momentum" style="height:36px; width:auto;">
+      </a>
+      <div style="display:flex; align-items:center; gap:28px;">
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#about"    class="nav-link">About</a>
+        <a href="#contact"  class="nav-link">Contact</a>
+        <a href="#contact"  class="btn-primary" style="padding:10px 22px; font-size:12px;">Let's Talk</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO — BackgroundPaths
+  ═══════════════════════════════════════════ -->
+  <section id="hero">
+
+    <!-- ── Content ── -->
+    <div id="hero-content" style="padding-top:100px;">
+
+      <!-- Eyebrow -->
+      <div style="display:flex; align-items:center; justify-content:center; gap:12px; margin-bottom:16px; opacity:0; transform:translateY(16px); animation: fadeUpIn 0.8s 0.2s ease forwards;">
+        <div class="divider-red"></div>
+        <span class="section-label" style="color:#888;">Northeast Ohio REALTOR®</span>
+        <div class="divider-red"></div>
+      </div>
+
+      <!-- Slogan badge -->
+      <div style="opacity:0; animation: fadeUpIn 0.8s 0.35s ease forwards; margin-bottom:20px;">
+        <span style="display:inline-block; background:var(--red); color:white; font-size:11px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; padding:6px 18px; border-radius:2px; box-shadow:0 4px 14px rgba(200,16,46,0.28);">Just Call Coop</span>
+      </div>
+
+      <!-- Animated title -->
+      <h1 id="hero-title" style="font-size: clamp(48px, 8vw, 96px); font-weight:700; line-height:1.05; letter-spacing:-0.02em; margin-bottom:16px;"></h1>
+
+      <!-- "Starts Here." — italic red, separate line -->
+      <div style="opacity:0; animation: fadeUpIn 0.8s 1.2s ease forwards; margin-bottom:28px;">
+        <span style="font-family:'Playfair Display',serif; font-style:italic; font-size:clamp(28px,4vw,52px); font-weight:600; color:var(--red);">Starts Here.</span>
+      </div>
+
+      <!-- Sub -->
+      <p style="font-size:clamp(15px,1.8vw,18px); color:#6B7280; line-height:1.7; max-width:500px; font-weight:300; margin:0 auto 44px; opacity:0; animation: fadeUpIn 0.8s 1.4s ease forwards;">
+        Expert guidance for buyers and sellers across Northeast Ohio — from your first showing to closing day.
+      </p>
+
+      <!-- CTA button (shadcn ghost + glassmorphism) -->
+      <div style="opacity:0; animation: fadeUpIn 0.8s 1.6s ease forwards;">
+        <div class="journey-wrapper">
+          <a href="#contact" class="journey-btn">
+            <span style="opacity:0.9; transition:opacity 0.3s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">Start Your Journey</span>
+            <span class="arrow" style="font-size:20px; line-height:1;">→</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div style="display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-top:64px; padding-top:40px; border-top:1px solid rgba(0,0,0,0.07); opacity:0; animation: fadeUpIn 0.8s 1.8s ease forwards;">
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:#111;">5★</div>
+          <div class="section-label" style="color:#aaa; margin-top:4px;">Client Rating</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:#111;">NE Ohio</div>
+          <div class="section-label" style="color:#aaa; margin-top:4px;">Market Expert</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="font-family:'Playfair Display',serif; font-size:30px; font-weight:700; color:#111;">24/7</div>
+          <div class="section-label" style="color:#aaa; margin-top:4px;">Always Available</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       HOMESMART ADVANTAGE BAND
+  ═══════════════════════════════════════════ -->
+  <section style="position:relative; overflow:hidden; background:#0d0d0d;">
+    <div style="position:absolute; inset:0; background-image:url('brand_assets/YouTube Banner-0.png'); background-size:cover; background-position:center; opacity:0.35;"></div>
+    <div style="position:absolute; inset:0; background: linear-gradient(90deg, rgba(13,13,13,0.95) 0%, rgba(13,13,13,0.7) 50%, rgba(13,13,13,0.92) 100%);"></div>
+    <div class="relative z-10" style="max-width:1280px; margin:0 auto; padding:60px 32px;">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:40px;">
+        <div>
+          <p style="font-size:13px; color:rgba(255,255,255,0.5); max-width:260px; line-height:1.6; margin:0;">Backed by one of the fastest-growing brokerages in the country.</p>
+        </div>
+        <div style="display:flex; align-items:center; gap:48px; flex-wrap:wrap;">
+          <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:32px;">
+            <div style="text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:white; line-height:1;">25+</div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:6px;">Years</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:white; line-height:1;">48</div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:6px;">States</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:#C8102E; line-height:1;">250+</div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:6px;">Offices</div>
+            </div>
+            <div style="text-align:center;">
+              <div style="font-family:'Playfair Display',serif; font-size:36px; font-weight:700; color:#C8102E; line-height:1;">25K+</div>
+              <div style="font-size:10px; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:6px;">Agents</div>
+            </div>
+          </div>
+          <!-- Forbes badge -->
+          <div style="border-left:1px solid rgba(255,255,255,0.12); padding-left:48px; display:flex; flex-direction:column; align-items:center; gap:6px;">
+            <div style="font-size:9px; font-weight:700; letter-spacing:0.18em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:2px;">As Seen In</div>
+            <div style="font-family:'Playfair Display',serif; font-size:26px; font-weight:700; color:white; letter-spacing:0.04em;">Forbes</div>
+            <div style="font-size:9px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:#C8102E; text-align:center; line-height:1.4;">Most Trusted<br>Companies 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       SERVICES
+  ═══════════════════════════════════════════ -->
+  <section id="services" style="padding:96px 32px; background:var(--light);">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div style="margin-bottom:56px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:14px;">
+          <div class="divider-red"></div>
+          <span class="section-label" style="color:var(--red);">What I Do</span>
+        </div>
+        <h2 style="font-size:clamp(28px,4vw,42px); color:var(--black); margin:0;">How I Can Help You</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:28px;">
+
+        <div class="service-card shadow-card" style="background:white; border-radius:6px; padding:32px; border-top:3px solid var(--red);">
+          <div style="width:44px;height:44px;background:rgba(200,16,46,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h3 style="font-size:22px;color:var(--black);margin:0 0 12px;">Buying a Home</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.75;margin:0 0 24px;">From understanding your budget to negotiating the best deal — I guide you through every step with confidence.</p>
+          <a href="#contact" class="section-label" style="color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,16,46,0.3);padding-bottom:2px;">Get Started →</a>
+        </div>
+
+        <div class="service-card shadow-card" style="background:white; border-radius:6px; padding:32px; border-top:3px solid var(--red);">
+          <div style="width:44px;height:44px;background:rgba(200,16,46,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          </div>
+          <h3 style="font-size:22px;color:var(--black);margin:0 0 12px;">Selling Your Home</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.75;margin:0 0 24px;">Strategic pricing, professional photography, and targeted marketing that gets your home sold fast — at top dollar.</p>
+          <a href="#contact" class="section-label" style="color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,16,46,0.3);padding-bottom:2px;">Get Your Value →</a>
+        </div>
+
+        <div class="service-card shadow-card" style="background:white; border-radius:6px; padding:32px; border-top:3px solid var(--red);">
+          <div style="width:44px;height:44px;background:rgba(200,16,46,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:20px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#C8102E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3 style="font-size:22px;color:var(--black);margin:0 0 12px;">Investment Properties</h3>
+          <p style="font-size:14px;color:var(--gray);line-height:1.75;margin:0 0 24px;">Identify high-yield opportunities and navigate the Northeast Ohio investment landscape with data-backed insight.</p>
+          <a href="#contact" class="section-label" style="color:var(--red);text-decoration:none;border-bottom:1px solid rgba(200,16,46,0.3);padding-bottom:2px;">Learn More →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       MARKETING POWER — for sellers
+  ═══════════════════════════════════════════ -->
+  <section style="background:#1A1A1A; padding:96px 32px; overflow:hidden;">
+    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:64px; align-items:center;">
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+          <div class="divider-red"></div>
+          <span class="section-label" style="color:rgba(255,255,255,0.4);">For Sellers</span>
+        </div>
+        <h2 style="font-size:clamp(28px,4vw,46px); color:white; margin:0 0 16px; line-height:1.1;">Your Listing,<br><em style="color:var(--red);">Elevated.</em></h2>
+        <p style="font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0 0 14px;">When you list with me, you get the full power of the HomeSmart marketing engine — professional photography, social media campaigns, targeted digital ads, open house flyers, and custom market reports.</p>
+        <p style="font-size:15px; color:rgba(255,255,255,0.55); line-height:1.8; margin:0 0 32px;">Every listing is treated like a launch.</p>
+        <a href="#contact" class="btn-primary">Get a Free Home Valuation</a>
+      </div>
+      <div style="position:relative; height:380px;">
+        <div class="mkt-card shadow-card" style="position:absolute; top:0; right:40px; width:68%; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08);">
+          <img src="brand_assets/Screenshot 2026-03-28 122710.png" alt="HomeSmart marketing templates" style="width:100%; display:block;">
+        </div>
+        <div class="mkt-card shadow-card" style="position:absolute; bottom:0; left:0; width:62%; border-radius:8px; overflow:hidden; border:1px solid rgba(255,255,255,0.08); box-shadow:0 24px 60px rgba(0,0,0,0.5);">
+          <img src="brand_assets/Screenshot 2026-03-24 152028.png" alt="HomeSmart market stats" style="width:100%; display:block;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       ABOUT — Meet Cooper Alan
+  ═══════════════════════════════════════════ -->
+  <section id="about" style="padding:96px 32px; background:white;">
+    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:64px; align-items:start;">
+
+      <!-- Headshot column -->
+      <div style="position:relative;">
+        <div class="shadow-red" style="max-width:400px; border-radius:6px; overflow:hidden; position:relative; z-index:2;">
+          <img src="brand_assets/Pernus, Cooper (1).png" alt="Cooper Alan, REALTOR®" style="width:100%; display:block;">
+        </div>
+        <!-- "Just Call Coop" tag -->
+        <div style="position:absolute; bottom:-16px; left:0; background:var(--red); color:white; font-size:11px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; padding:8px 20px; border-radius:2px; z-index:5; box-shadow:0 4px 14px rgba(200,16,46,0.35);">Just Call Coop</div>
+      </div>
+
+      <!-- Bio column -->
+      <div style="padding-top:10px;">
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+          <div class="divider-red"></div>
+          <span class="section-label" style="color:var(--red);">Meet Cooper Alan</span>
+        </div>
+        <h2 style="font-size:clamp(30px,4vw,46px); color:var(--black); margin:0 0 8px; line-height:1.1;">Cooper Alan</h2>
+        <p style="font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase; color:var(--gray); margin:0 0 24px;">REALTOR® · HomeSmart Real Estate Momentum · Northeast Ohio</p>
+
+        <p style="font-size:15px; color:#4B5563; line-height:1.8; margin:0 0 16px;">I'm Cooper Alan — a REALTOR® with HomeSmart Real Estate Momentum, and I bring the same energy to every client: hard work, total availability, and a genuine commitment to your success. Whether you're buying your first home or selling for top dollar, I'm in your corner every step of the way.</p>
+
+        <p style="font-size:15px; color:#4B5563; line-height:1.8; margin:0 0 16px;">I'm available <strong>24/7 — in state or out of state</strong>. If you call, I pick up. If you text, I respond. Real estate doesn't work on a 9-to-5 schedule, and neither do I.</p>
+
+        <p style="font-size:15px; color:#4B5563; line-height:1.8; margin:0 0 28px;">I'm also tech-savvy with a deep understanding of social media marketing — which means your listing doesn't just go on the MLS, it gets in front of the right people on the right platforms at the right time.</p>
+
+        <!-- Trait chips -->
+        <div style="display:flex; flex-wrap:wrap; gap:10px; margin-bottom:36px;">
+          <span style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--red); border:1px solid rgba(200,16,46,0.25); border-radius:2px; padding:6px 14px;">24/7 Available</span>
+          <span style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--red); border:1px solid rgba(200,16,46,0.25); border-radius:2px; padding:6px 14px;">Always Picks Up</span>
+          <span style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--red); border:1px solid rgba(200,16,46,0.25); border-radius:2px; padding:6px 14px;">Tech-Savvy</span>
+          <span style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--red); border:1px solid rgba(200,16,46,0.25); border-radius:2px; padding:6px 14px;">Social Media Marketing</span>
+          <span style="font-size:12px; font-weight:600; letter-spacing:0.06em; color:var(--red); border:1px solid rgba(200,16,46,0.25); border-radius:2px; padding:6px 14px;">NE Ohio Expert</span>
+        </div>
+
+        <div style="display:flex; gap:40px; margin:0 0 40px; padding-bottom:40px; border-bottom:1px solid #F0EEF0; flex-wrap:wrap;">
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--black);">5★</div>
+            <div class="section-label" style="color:var(--gray); margin-top:4px;">Google Reviews</div>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--black);">24/7</div>
+            <div class="section-label" style="color:var(--gray); margin-top:4px;">Available</div>
+          </div>
+          <div>
+            <div style="font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--black);">NE Ohio</div>
+            <div class="section-label" style="color:var(--gray); margin-top:4px;">Expert</div>
+          </div>
+        </div>
+        <a href="#contact" class="btn-primary">Work With Me</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TEAM — Gregory & Marianne
+  ═══════════════════════════════════════════ -->
+  <section style="padding:80px 32px; background:var(--light);">
+    <div style="max-width:1280px; margin:0 auto; display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:64px; align-items:center;">
+
+      <!-- Description column (left) -->
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px;">
+          <div class="divider-red"></div>
+          <span class="section-label" style="color:var(--red);">The Team Behind Me</span>
+        </div>
+        <h2 style="font-size:clamp(26px,3.5vw,40px); color:var(--black); margin:0 0 20px; line-height:1.15;">Built on Experience.<br><em style="color:var(--red);">Driven by Excellence.</em></h2>
+        <p style="font-size:15px; color:#4B5563; line-height:1.8; margin:0 0 28px;">I don't just work with the best — I <em>learn</em> from the best. Alongside me are two of the most respected names in Northeast Ohio real estate.</p>
+
+        <!-- Gregory Pernus -->
+        <div style="background:white; border-radius:6px; padding:24px; margin-bottom:16px; border-left:3px solid var(--red);" class="shadow-card">
+          <div style="font-size:16px; font-weight:700; color:var(--black); margin-bottom:4px;">Gregory Pernus</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); margin-bottom:12px;">Co-Broker · 30+ Years in the Industry</div>
+          <p style="font-size:14px; color:#4B5563; line-height:1.75; margin:0;">My father and mentor. Gregory has spent over three decades mastering every corner of the Northeast Ohio real estate market. His guidance, wisdom, and work ethic shaped the agent I am today — and he brings that same experience directly to every transaction we handle together.</p>
+        </div>
+
+        <!-- Marianne Drenik -->
+        <div style="background:white; border-radius:6px; padding:24px; border-left:3px solid var(--red);" class="shadow-card">
+          <div style="font-size:16px; font-weight:700; color:var(--black); margin-bottom:4px;">Marianne Drenik</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; color:var(--red); margin-bottom:12px;">Broker of Record · HomeSmart Real Estate Momentum</div>
+          <p style="font-size:14px; color:#4B5563; line-height:1.75; margin:0;">As the Broker of HomeSmart Real Estate Momentum, Marianne is the backbone of our brokerage. Her leadership, integrity, and commitment to excellence set the standard for every agent under this roof — and her support adds tremendous value to each client we serve.</p>
+        </div>
+      </div>
+
+      <!-- Team photo column (right) -->
+      <div style="display:flex; justify-content:center;">
+        <div class="shadow-card" style="border-radius:8px; overflow:hidden; max-width:420px; width:100%; border:3px solid white;">
+          <img src="brand_assets/Screenshot 2025-11-10 122201.png" alt="Cooper Alan with Gregory Pernus and Marianne Drenik" style="width:100%; height:auto; display:block;">
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TESTIMONIALS
+  ═══════════════════════════════════════════ -->
+  <section style="padding:96px 32px; background:var(--light);">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div style="text-align:center; margin-bottom:56px;">
+        <div style="display:flex; justify-content:center; margin-bottom:14px;"><div class="divider-red"></div></div>
+        <span class="section-label" style="color:var(--red);">Client Love</span>
+        <h2 style="font-size:clamp(28px,4vw,42px); color:var(--black); margin:12px 0 0;">What Clients Are Saying</h2>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:28px;">
+
+        <div class="shadow-card" style="background:white; border-radius:6px; padding:32px;">
+          <div style="color:#C8102E; font-size:20px; margin-bottom:8px;">★★★★★</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); margin-bottom:16px;">Google Review</div>
+          <p class="testimonial-quote" style="font-size:15px; color:#374151; line-height:1.75; margin:0 0 20px;">"Cooper did a fantastic job selling my condominium. He was more than a realtor to me — he is a friend. I live in Florida and the condo is in Ohio, so he took care of everything while I was 1,200 miles away. I couldn't have done this without him."</p>
+          <div style="font-size:13px; font-weight:600; color:var(--black);">Kirk E.</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:2px;">Seller · Northeast Ohio</div>
+        </div>
+
+        <div class="shadow-card" style="background:white; border-radius:6px; padding:32px;">
+          <div style="color:#C8102E; font-size:20px; margin-bottom:8px;">★★★★★</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); margin-bottom:16px;">Google Review</div>
+          <p class="testimonial-quote" style="font-size:15px; color:#374151; line-height:1.75; margin:0 0 20px;">"Cooper did an amazing job from start to finish. He was very knowledgeable about comps and helped us come up with a selling game plan. Creative marketing, open houses, constant communication — our house sold in a couple weeks. Would highly recommend. Just Call Coop!"</p>
+          <div style="font-size:13px; font-weight:600; color:var(--black);">Todd S.</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:2px;">Seller · Northeast Ohio</div>
+        </div>
+
+        <div class="shadow-card" style="background:white; border-radius:6px; padding:32px;">
+          <div style="color:#C8102E; font-size:20px; margin-bottom:8px;">★★★★★</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); margin-bottom:16px;">Google Review</div>
+          <p class="testimonial-quote" style="font-size:15px; color:#374151; line-height:1.75; margin:0 0 20px;">"Coop was extremely professional and quick to respond to questions and concerns during our process. He communicated well throughout. I'm very happy to have used him for my listing."</p>
+          <div style="font-size:13px; font-weight:600; color:var(--black);">Bob E.</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:2px;">Seller · Northeast Ohio</div>
+        </div>
+
+        <div class="shadow-card" style="background:white; border-radius:6px; padding:32px;">
+          <div style="color:#C8102E; font-size:20px; margin-bottom:8px;">★★★★★</div>
+          <div style="font-size:11px; font-weight:600; letter-spacing:0.08em; text-transform:uppercase; color:var(--gray); margin-bottom:16px;">Google Review</div>
+          <p class="testimonial-quote" style="font-size:15px; color:#374151; line-height:1.75; margin:0 0 20px;">"Great and seamless experience working with Cooper — highly recommend!!"</p>
+          <div style="font-size:13px; font-weight:600; color:var(--black);">Jackie S.</div>
+          <div style="font-size:12px; color:var(--gray); margin-top:2px;">Client · Northeast Ohio</div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       CONTACT
+  ═══════════════════════════════════════════ -->
+  <section id="contact" style="position:relative; overflow:hidden; padding:96px 32px; background:#030712;">
+    <div style="position:absolute; inset:0; background: radial-gradient(ellipse at 70% 30%, rgba(200,16,46,0.1) 0%, transparent 55%), radial-gradient(ellipse at 20% 80%, rgba(99,68,245,0.07) 0%, transparent 50%); pointer-events:none;"></div>
+    <div style="position:relative; z-index:1; max-width:640px; margin:0 auto; text-align:center;">
+      <div style="display:flex; justify-content:center; margin-bottom:20px;"><div class="divider-red"></div></div>
+      <span class="section-label" style="color:rgba(255,255,255,0.45);">Get In Touch</span>
+      <h2 style="font-size:clamp(30px,4.5vw,52px); color:white; margin:16px 0 12px; line-height:1.1;">Ready to Make<br>Your Move?</h2>
+      <p style="font-size:16px; color:rgba(255,255,255,0.52); line-height:1.7; margin:0 0 40px; font-weight:300;">Whether you're buying, selling, or just exploring — I'd love to connect.</p>
+
+      <div class="shadow-card" style="background:white; border-radius:12px; padding:32px; text-align:left;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:6px;">First Name</label>
+            <input type="text" placeholder="John" style="width:100%;border:1px solid #E5E7EB;border-radius:4px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C8102E'" onblur="this.style.borderColor='#E5E7EB'">
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:6px;">Last Name</label>
+            <input type="text" placeholder="Smith" style="width:100%;border:1px solid #E5E7EB;border-radius:4px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C8102E'" onblur="this.style.borderColor='#E5E7EB'">
+          </div>
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:6px;">Email</label>
+          <input type="email" placeholder="john@example.com" style="width:100%;border:1px solid #E5E7EB;border-radius:4px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C8102E'" onblur="this.style.borderColor='#E5E7EB'">
+        </div>
+        <div style="margin-bottom:20px;">
+          <label style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:6px;">I'm Looking to...</label>
+          <select style="width:100%;border:1px solid #E5E7EB;border-radius:4px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;color:#374151;background:#fff;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C8102E'" onblur="this.style.borderColor='#E5E7EB'">
+            <option>Buy a Home</option>
+            <option>Sell My Home</option>
+            <option>Buy and Sell</option>
+            <option>Get a Home Valuation</option>
+            <option>Just Exploring</option>
+          </select>
+        </div>
+        <div style="margin-bottom:24px;">
+          <label style="font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#6B7280;display:block;margin-bottom:6px;">Message (Optional)</label>
+          <textarea placeholder="Tell me a bit about what you're looking for..." rows="4" style="width:100%;border:1px solid #E5E7EB;border-radius:4px;padding:12px 14px;font-size:14px;font-family:'Inter',sans-serif;outline:none;resize:vertical;transition:border-color 0.2s;" onfocus="this.style.borderColor='#C8102E'" onblur="this.style.borderColor='#E5E7EB'"></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%;text-align:center;">Send Message</button>
+      </div>
+
+      <div style="display:flex; justify-content:center; gap:32px; margin-top:36px; flex-wrap:wrap;">
+        <a href="tel:4403219545" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.81-.81a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (440) 321-9545
+        </a>
+        <a href="mailto:JustCallCoop@gmail.com" style="display:flex;align-items:center;gap:8px;color:rgba(255,255,255,0.6);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.6)'">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          JustCallCoop@gmail.com
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer style="background:#0d0d0d; color:rgba(255,255,255,0.45); padding:48px 32px 28px;">
+    <div style="max-width:1280px; margin:0 auto;">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:40px; margin-bottom:40px; padding-bottom:40px; border-bottom:1px solid rgba(255,255,255,0.07);">
+        <div style="max-width:280px;">
+          <img src="brand_assets/home smart red then white.png" alt="HomeSmart" style="height:30px; margin-bottom:16px; filter:brightness(0) invert(1);">
+          <p style="font-size:13px; line-height:1.7; margin:0 0 20px;">Cooper Alan · REALTOR®<br>HomeSmart Real Estate Momentum<br>Northeast Ohio</p>
+        </div>
+        <div style="display:flex; gap:60px; flex-wrap:wrap;">
+          <div>
+            <div class="section-label" style="color:rgba(255,255,255,0.3); margin-bottom:14px;">Navigate</div>
+            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+              <li><a href="#services" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Services</a></li>
+              <li><a href="#about" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">About</a></li>
+              <li><a href="#contact" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="section-label" style="color:rgba(255,255,255,0.3); margin-bottom:14px;">Connect</div>
+            <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px;">
+              <li><a href="https://instagram.com/justcallcooprealty" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Instagram</a></li>
+              <li><a href="https://www.youtube.com/@JustCallCoopRealty" target="_blank" rel="noopener" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">YouTube</a></li>
+              <li><a href="mailto:JustCallCoop@gmail.com" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">Email</a></li>
+              <li><a href="tel:4403219545" style="font-size:13px;color:rgba(255,255,255,0.5);text-decoration:none;" onmouseover="this.style.color='white'" onmouseout="this.style.color='rgba(255,255,255,0.5)'">(440) 321-9545</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:12px; font-size:12px;">
+        <span>&copy; 2026 Cooper Alan · HomeSmart Real Estate Momentum · All rights reserved.</span>
+        <span>Equal Housing Opportunity ⌂ &nbsp;·&nbsp; <a href="#" style="color:rgba(255,255,255,0.35);text-decoration:underline;">Privacy Policy</a></span>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════════
+       GLOBAL ANIMATIONS
+  ═══════════════════════════════════════════ -->
+  <style>
+    @keyframes fadeUpIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO — Letter-by-letter spring title animation
+  ═══════════════════════════════════════════ -->
+  <script>
+  (function () {
+    var titleEl = document.getElementById('hero-title');
+    var TITLE   = 'Your Next Chapter';
+    var words   = TITLE.split(' ');
+    var allLetterSpans = [];
+
+    words.forEach(function (word, wi) {
+      var wordSpan = document.createElement('span');
+      wordSpan.className = 'word-span';
+
+      word.split('').forEach(function (letter, li) {
+        var span = document.createElement('span');
+        span.className = 'letter-span';
+        span.textContent = letter;
+        var delay = wi * 0.1 + li * 0.03 + 0.5;
+        span.style.transitionDuration = '0.6s';
+        span.style.transitionDelay   = delay + 's';
+        wordSpan.appendChild(span);
+        allLetterSpans.push(span);
+      });
+
+      titleEl.appendChild(wordSpan);
+    });
+
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        allLetterSpans.forEach(function (s) { s.classList.add('visible'); });
+      });
+    });
+  })();
+  </script>
+
+</body>
+</html>
